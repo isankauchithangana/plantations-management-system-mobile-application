@@ -32,7 +32,7 @@ class _ConnectSensorsPageState extends State<ConnectSensorsPage> {
       }
     });
   }
-
+}
   
     );
   }
