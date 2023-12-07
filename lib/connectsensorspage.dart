@@ -32,7 +32,14 @@ class _ConnectSensorsPageState extends State<ConnectSensorsPage> {
       }
     });
   }
-}
+  void _connectToDevice(BluetoothDevice device) async {
+    try {
+      await device.connect();
+      setState(() {
+        connectedDevice = device;
+        connectionStatus = 'Connected to: ${device.name}';
+      });
+
   
     );
   }
