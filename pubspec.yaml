@@ -30,7 +30,7 @@ environment:
 dependencies:
   faker: ^2.0.0
   flutter:
-    sdk: flutter
+   sdk: flutter
   mongo_dart: ^0.9.3
   fl_chart: ^0.66.0
 
