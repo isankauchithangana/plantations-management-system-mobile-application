@@ -98,7 +98,7 @@ class _NewCultivationPageState extends State<NewCultivationPage> {
               SizedBox(height: 16),
               TextFormField(
                 controller: landSizeController,
-                decoration: InputDecoration(labelText: 'Land Size'),
+                decoration: InputDecoration(labelText: 'Land Size (hect)'),
               ),
               SizedBox(height: 16),
               ListTile(
