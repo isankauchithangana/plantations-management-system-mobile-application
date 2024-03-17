@@ -51,15 +51,16 @@ class _LoginState extends State<Login> {
             child: SafeArea(
               child: Center(
                 child: Container(
+                  
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  padding: EdgeInsets.all(44.0),
+                  padding: EdgeInsets.all(40.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: 30),
                       Text(
                         "Login",
                         style: TextStyle(
