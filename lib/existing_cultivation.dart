@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartfarm/bdHelper/mongodb.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'SavedCultivationPage.dart';
 
 class ExistingCultivationPage extends StatefulWidget {
   @override
@@ -92,31 +92,52 @@ class _ExistingCultivationPageState extends State<ExistingCultivationPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Land Name:',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Land Name:',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(landName,
+                                            style: TextStyle(fontSize: 18)),
+                                      ],
                                     ),
-                                    SizedBox(height: 5), // Small padding
-                                    Text(landName,
-                                        style: TextStyle(fontSize: 18)),
                                     SizedBox(height: 10),
-                                    Text(
-                                      'Crop Type:',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Crop Type:',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(cropType,
+                                            style: TextStyle(fontSize: 18)),
+                                      ],
                                     ),
-                                    SizedBox(height: 5), // Small padding
-                                    Text(cropType,
-                                        style: TextStyle(fontSize: 18)),
                                     SizedBox(height: 20),
                                   ],
                                 ),
                               ),
                               SizedBox(width: 10),
-                              CircularChartWidget(),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          SavedCultivationPage(
+                                              cultivationDetails:
+                                                  cultivationData[index]),
+                                    ),
+                                  );
+                                },
+                                child: Text('View'),
+                              ),
                             ],
                           ),
                         ),
@@ -127,34 +148,6 @@ class _ExistingCultivationPageState extends State<ExistingCultivationPage> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class CircularChartWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      height: 100,
-      child: PieChart(
-        PieChartData(
-          sections: [
-            PieChartSectionData(
-              color: Color.fromARGB(255, 21, 253, 0),
-              title: '80%',
-              radius: 40,
-              value: 80,
-            ),
-            PieChartSectionData(
-              color: Color.fromARGB(255, 216, 216, 216),
-              title: '20%',
-              radius: 25,
-              value: 20,
-            ),
-          ],
         ),
       ),
     );
