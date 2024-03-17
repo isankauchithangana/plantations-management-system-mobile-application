@@ -19,6 +19,8 @@ class MongoDatabase {
       cropCollection,
       newCultivationCollection,
       newsCollection,
+      noticeCollection,
+      marketPriceCollection,
       cultivationsCollection;
 
   static Future<void> connect() async {
@@ -34,6 +36,17 @@ class MongoDatabase {
     cropCollection = db2.collection(TEST_USER_COLLECTION);
     cultivationsCollection = db2.collection("cultivations");
     newsCollection = db2.collection("news");
+    noticeCollection = db2.collection("notices");
+    marketPriceCollection = db2.collection("marketprices");
+  }
+
+  static Future<Map<String, dynamic>> getCultivationById(String id) async {
+    await connect();
+    var cultivation =
+        await newCultivationCollection.findOne(where.id(ObjectId.parse(id)));
+
+    await db.close();
+    return cultivation != null ? cultivation : {};
   }
 
   static Future<List<String>> getCropTypes() async {
@@ -250,5 +263,57 @@ class MongoDatabase {
 
     await db2.close();
     return newsList;
+  }
+
+  static Future<List<NewsModel>> getNotice() async {
+    await connect();
+    final collection =
+        noticeCollection; // Assuming "news" is the collection name
+
+    final cursor = await collection.find();
+
+    final List<NewsModel> noticeList = [];
+    await cursor.forEach((notices) {
+      if (notices != null) {
+        // Convert MongoDB document to NewsModel
+        final NewsModel noticeModel = NewsModel(
+          title: notices['title'] as String,
+          content: notices['body'] as String,
+          // image: news['image'] as String,
+        );
+
+        noticeList.add(noticeModel);
+      }
+    });
+
+    await db2.close();
+    return noticeList;
+  }
+
+  static Future<List<Map<String, dynamic>>> getMarketPrices() async {
+    await connect();
+    final collection =
+        marketPriceCollection; // Assuming "marketPrice" is the collection name
+    final cursor = await collection.find();
+
+    final List<Map<String, dynamic>> prices = [];
+    await cursor.forEach((price) {
+      if (price != null) {
+        prices.add(price);
+      }
+    });
+
+    await db.close();
+    return prices;
+  }
+
+  static Future<void> deleteCultivationDetails(String id) async {
+    await connect();
+
+    await cultivationsCollection.remove(where.id(ObjectId.parse(id)));
+
+    print('Cultivation data deleted successfully');
+
+    await db2.close();
   }
 }
