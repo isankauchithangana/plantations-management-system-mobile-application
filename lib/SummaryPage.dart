@@ -88,13 +88,13 @@ class SummaryPage extends StatelessWidget {
                         children: [
                           buildTableRow("Crop Type", cropType, 0),
                           buildTableRow("Land Name", landName, 1),
-                          buildTableRow("Land Size", landSize, 2),
+                          buildTableRow("Land Size (hect)", landSize, 2),
                           buildTableRow("Fertilizer", fertilizerName, 3),
                           buildTableRow(
-                              "Fertilizer Amount for 1 hectare",
+                              "Fertilizer Amount for 1 hectare (Kg)",
                               fertilizerAmount,
                               4),
-                          buildTableRow("Total Fertilizer Needed",
+                          buildTableRow("Total Fertilizer Needed (Kg)",
                               formattedTotalFertilizerNeeded, 5),
                           buildTableRow("Plants for 1 hectare", plants, 6),
                           buildTableRow("Total Plants Needed",
