@@ -7,7 +7,7 @@ class CultivationHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+         title: Text(
           'Cultivations',
           style: TextStyle(color: Colors.white),
         ),
@@ -27,7 +27,7 @@ class CultivationHomePage extends StatelessWidget {
               height: 100, // Adjust the size as needed
             ),
           ),
-        ], // Remove app bar shadow
+        ],// Remove app bar shadow
       ),
       body: Container(
         decoration: BoxDecoration(
