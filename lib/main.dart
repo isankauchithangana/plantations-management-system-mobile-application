@@ -1,45 +1,31 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
-import 'loading_page.dart'; // Import the Loading Page
-// import 'weather_info_page.dart'; // Import the Weather Info page
-import 'cultivation_page.dart'; // Import the Weather Info page
-import 'home_page.dart';
-import 'login_page.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:smartfarm/bdHelper/mongodb.dart';
+import 'login.dart'; // Import the Register widget
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterBlue flutterBlue = FlutterBlue.instance;
+  await MongoDatabase.connect();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/loading', // Set the initial route to 'loading'
-      routes: {
-        '/loading': (context) => const LoadingPage(),
-        '/home': (context) => const MyHomePage(title: 'SmartFarm'),
-        '/login': (context) => LoginPage(),
-      },
-
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 12, 138, 1)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoadingPage(), // Set the Loading Page as the initial page
+      home: Login(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -63,129 +49,39 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Stack(
-        children: <Widget>[
-          // Background Photo
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    'assets/background_image.jpg'), // Add your image asset path here
-                fit: BoxFit.cover,
-              ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
             ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
           ),
-          Center(
-            child: GridView.count(
-              crossAxisCount: 2, // Display buttons in two columns
-              mainAxisSpacing: 16.0, // Add vertical spacing between buttons
-              crossAxisSpacing: 16.0, // Add horizontal spacing between buttons
-              padding: EdgeInsets.all(16.0), // Adjust padding as needed
-              children: <Widget>[
-                // Button 1: Start a New Cultivation
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to the New Cultivation page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CultivationPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(180, 250, 251, 252),
-                    minimumSize: Size(160, 160),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.agriculture, // Change icon here
-                          size: 60,
-                          color: Color.fromARGB(255, 3, 1, 99)),
-                      Text('Cultivation', // Change text here
-                          style: TextStyle(fontSize: 18, color: Colors.black)),
-                    ],
-                  ),
-                ),
-                // Button 2: Get Weather Info
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to the Weather Info page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(180, 144, 240, 149),
-                    minimumSize: Size(160, 160),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.cloud,
-                          size: 60, color: Color.fromARGB(255, 1, 94, 16)),
-                      Text('Weather Info',
-                          style: TextStyle(fontSize: 18, color: Colors.black)),
-                    ],
-                  ),
-                ),
-                // Button 3: View Existing Cultivations
-                ElevatedButton(
-                  onPressed: () {
-                    // Add functionality for viewing existing cultivations
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(
-                        180, 236, 210, 137), // Adjust button color
-                    minimumSize: Size(160, 160), // Adjust button size
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.list,
-                          size: 60, color: Color.fromARGB(255, 102, 46, 1)),
-                      Text('News', // Change text here
-                          style: TextStyle(fontSize: 18, color: Colors.black)),
-                    ],
-                  ),
-                ),
-                // Button 4: Notifications
-                ElevatedButton(
-                  onPressed: () {
-                    // Add functionality for accessing notifications
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(
-                        180, 247, 160, 131), // Adjust button color
-                    minimumSize: Size(160, 160), // Adjust button size
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.notifications,
-                          size: 60, color: Color.fromARGB(255, 143, 28, 28)),
-                      Text('Notifications',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 8, 8, 8))),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          SizedBox(height: 16.0),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+            },
+            tooltip: 'Register',
+            child: const Icon(Icons.person),
           ),
         ],
       ),

@@ -1,20 +1,14 @@
-// cultivation_page.dart
-
 import 'package:flutter/material.dart';
-import 'widget.dart';
+import 'New_Cultivation_Page.dart';
+import 'existing_cultivation.dart';
 
-class CultivationPage extends StatelessWidget {
-  final String userName;
-
-  // Constructor to receive the user's name
-  CultivationPage({required this.userName});
-
+class CultivationHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          ('Welcome, $userName'), // Display user's name in the app bar
+         title: Text(
+          'Cultivations',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Color.fromARGB(255, 5, 5, 5),
@@ -33,7 +27,7 @@ class CultivationPage extends StatelessWidget {
               height: 100, // Adjust the size as needed
             ),
           ),
-        ],
+        ],// Remove app bar shadow
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -52,7 +46,13 @@ class CultivationPage extends StatelessWidget {
               // Button 1: Start a New Cultivation
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the NewCultivationPage when pressed
+                  // Navigate to the New Cultivation page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewCultivationPage(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(180, 250, 251, 252),
@@ -64,21 +64,25 @@ class CultivationPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.link,
-                        size: 60, color: Color.fromARGB(255, 4, 8, 243)),
-                    Text('Connect With Sensors',
-                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                    Icon(
+                      Icons.add,
+                      size: 60,
+                      color: Color.fromARGB(255, 4, 8, 243),
+                    ),
+                    Text(
+                      'New Cultivation',
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
                   ],
                 ),
               ),
               // Button 2: View Existing Cultivations
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the NewCultivationPage when pressed
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WidgetPage(),
+                      builder: (context) => ExistingCultivationPage(),
                     ),
                   );
                 },
@@ -92,10 +96,15 @@ class CultivationPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.link_off,
-                        size: 60, color: Color.fromARGB(255, 102, 46, 1)),
-                    Text('Connect Without Sensors',
-                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                    Icon(
+                      Icons.history,
+                      size: 60,
+                      color: Color.fromARGB(255, 102, 46, 1),
+                    ),
+                    Text(
+                      'Existing Cultivations',
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
                   ],
                 ),
               ),
@@ -105,4 +114,10 @@ class CultivationPage extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: CultivationHomePage(),
+  ));
 }
