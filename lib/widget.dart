@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'cultivation_home_page.dart';
 import 'news.dart';
+import 'market_price_page.dart'; // Import your MarketPricePage file
+import 'weather.dart'; // Import your MarketPricePage file
+import 'Notice.dart';
 
 class WidgetPage extends StatelessWidget {
   @override
@@ -74,7 +77,10 @@ class WidgetPage extends StatelessWidget {
               // Button 2: View Existing Cultivations
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to the HomePage when pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NoticePage()),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(180, 236, 210, 137),
@@ -94,25 +100,7 @@ class WidgetPage extends StatelessWidget {
                 ),
               ),
               // Button 3: Weather
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(180, 120, 180, 255),
-                  minimumSize: Size(160, 160),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.cloud,
-                        size: 60, color: Color.fromARGB(255, 36, 31, 31)),
-                    Text('Weather',
-                        style: TextStyle(fontSize: 18, color: Colors.black)),
-                  ],
-                ),
-              ),
+             
               // Button 4: News
               ElevatedButton(
                 onPressed: () {
@@ -134,6 +122,56 @@ class WidgetPage extends StatelessWidget {
                     Icon(Icons.article,
                         size: 60, color: Color.fromARGB(255, 36, 35, 35)),
                     Text('News',
+                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                  ],
+                ),
+              ),
+              // Button 5: Market Price
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MarketPricePage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(180, 150, 187, 136),
+                  minimumSize: Size(160, 160),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.shopping_cart,
+                        size: 60, color: Color.fromARGB(255, 36, 35, 35)),
+                    Text('Market Price',
+                        style: TextStyle(fontSize: 18, color: Colors.black)),
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to the Weather Info page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color.fromARGB(180, 144, 240, 149),
+                  minimumSize: Size(160, 160),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.cloud,
+                        size: 60, color: Color.fromARGB(255, 1, 94, 16)),
+                    Text('Weather Info',
                         style: TextStyle(fontSize: 18, color: Colors.black)),
                   ],
                 ),
